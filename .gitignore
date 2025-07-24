@@ -33,6 +33,7 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+[Bb]in/
 
 # Build results on 'Bin' directories
 **/[Bb]in/*
@@ -416,3 +417,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+.DS_Store
+Thumbs.db
+.idea
+appsettings.Development.json

@@ -1,0 +1,6 @@
+dotnet ef migrations add InitialCreate
+
+dotnet ef database update
+
+dotnet ef migrations add m0
+dotnet ef migrations script -o sql.txt
