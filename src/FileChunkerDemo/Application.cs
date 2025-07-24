@@ -86,10 +86,14 @@ public class Application
                     _logger.LogError(e,$"File chunk processing failed. FileId: {file.Id}");
                     file.FileProcessStatusEnum = FileProcessStatus.Failed;
                 }
+                _logger.LogInformation($"File chunks updating to database. FileId: {file.Id}");
                 foreach (var chunk in file.FileChunks)
                     await _customFileChunkRepository.UpdateAsync(chunk);
+                _logger.LogInformation($"File chunks update done. FileId: {file.Id}");
 
+                _logger.LogInformation($"File updating to database. FileId: {file.Id}");
                 await _customFileRepository.UpdateAsync(file);
+                _logger.LogInformation($"File update done. FileId: {file.Id}");
             }
 
             if (file.FileProcessStatusEnum != FileProcessStatus.Failed)
@@ -165,8 +169,6 @@ public class Application
     {
         //await CleanUpStorages();
 
-        _logger.LogInformation("Processing files...");
-
         var splitFilesBasePath = $"/Users/{Environment.UserName}/Downloads";
 
         var splitFileList = new List<string>
@@ -180,8 +182,8 @@ public class Application
 
         //download and merge
         var destinationFolderPath = _appSettings.FileProcessFolderFullPath;
-        await ProcessMergeFile(60, destinationFolderPath);
-        await ProcessMergeFile(61, destinationFolderPath);
+        await ProcessMergeFile(1, destinationFolderPath);
+        await ProcessMergeFile(2, destinationFolderPath);
 
 
         Console.WriteLine($"Press any key to exit...");
